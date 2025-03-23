@@ -34,17 +34,31 @@ void Game::initVariables()
     this->jump = false;
 
     // Load textures
-    this->floorTexture.loadFromFile("C:/EldenBracelet/Images/oak_woods_tileset.png");
-    this->layerOne.loadFromFile("C:/EldenBracelet/Images/background_layer_1.png");
-    this->layerTwo.loadFromFile("C:/EldenBracelet/Images/background_layer_2.png");
-    this->layerThree.loadFromFile("C:/EldenBracelet/Images/background_layer_3.png");
-    this->logoTexture.loadFromFile("C:/EldenBracelet/Images/DALL_E_2025-03-13_07.41.57_-_A_detailed_fantasy-style_logo_featuring_the_words__Elden_Bracelet__in_an_elegant__readable_medieval_font._The_text_should_have_a_glowing__magical_aura-removebg-preview.png");
 
-    this->floor.setTexture(this->floorTexture);
-    this->bkgOne.setTexture(layerOne);
-    this->bkgTwo.setTexture(layerTwo);
-    this->bkgThree.setTexture(layerThree);
+    this->logoTexture.loadFromFile("C:/EldenBracelet/Images/DALL_E_2025-03-13_07.41.57_-_A_detailed_fantasy-style_logo_featuring_the_words__Elden_Bracelet__in_an_elegant__readable_medieval_font._The_text_should_have_a_glowing__magical_aura-removebg-preview.png");
     this->logo.setTexture(this->logoTexture);
+
+    sf::Texture image;
+    image.loadFromFile("C:/EldenBracelet/Images/Layers/1.png");
+    backgroundTexture.push_back(image);
+    image.loadFromFile("C:/EldenBracelet/Images/Layers/2.png");
+    backgroundTexture.push_back(image);
+    image.loadFromFile("C:/EldenBracelet/Images/Layers/3.png");
+    backgroundTexture.push_back(image);
+    image.loadFromFile("C:/EldenBracelet/Images/Layers/4.png");
+    backgroundTexture.push_back(image);
+    image.loadFromFile("C:/EldenBracelet/Images/Layers/5.png");
+    backgroundTexture.push_back(image);
+
+    sf::Sprite temp;
+    float horizontal = 1400.f / 576.f;
+    float vertical = 900.f / 324.f;
+    for (int i = 0; i < 5; i++) {
+        temp.setTexture(backgroundTexture[i]);
+        temp.setScale(horizontal , vertical);
+        temp.setPosition(0.f, 0.f);
+        backgroundSprite.push_back(temp);
+    }
 }
 
 void Game::initMenuText()
@@ -93,38 +107,14 @@ void Game::render()
     if (this->menu == 1) // If game is active
     {
         this->renderBackground();
-        this->renderFloor();
     }
     else if (this->menu == 0) // If menu is active
     {
-        this->renderBackground();
         this->renderLogo();
-        this->renderMenuText();
+
     }
 
     this->window->display();
-}
-
-void Game::renderFloor()
-{
-    for (int i = 0; i < 5; i++) {
-        this->floor.setScale(4, 4);
-        this->floor.setPosition(i * 280, 800);
-        this->window->draw(this->floor);
-    }
-}
-
-void Game::renderBackground()
-{
-    this->bkgOne.setPosition(0, 0);
-    this->bkgThree.setPosition(0, 0);
-    this->bkgTwo.setPosition(0, 0);
-    this->bkgOne.setScale(4.375, 5);
-    this->bkgTwo.setScale(4.375, 5);
-    this->bkgThree.setScale(4.375, 5);
-    this->window->draw(bkgOne);
-    this->window->draw(bkgTwo);
-    this->window->draw(bkgThree);
 }
 
 void Game::renderLogo()
@@ -133,12 +123,14 @@ void Game::renderLogo()
     this->window->draw(logo);
 }
 
-void Game::renderMenuText()
-{
-    this->window->draw(this->menuText);
-}
-
 void Game::renderPlayer()
 {
     // Implement player rendering if needed
+}
+
+void Game::renderBackground()
+{
+    for (int i = 0; i < 5; i++) {
+        window->draw(backgroundSprite[i]);
+    }
 }
