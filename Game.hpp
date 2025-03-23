@@ -1,5 +1,10 @@
 #pragma once
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
+#include <vector>
 
 class Game
 {
@@ -12,12 +17,10 @@ private:
     void initWindow();
 
     // Textures
-    sf::Texture floorTexture;
-    sf::Texture layerOne;
-    sf::Texture layerTwo;
-    sf::Texture layerThree;
-    sf::Texture logoTexture;
 
+    sf::Texture logoTexture;
+    std::vector <sf::Texture> backgroundTexture;
+    std::vector <sf::Sprite> backgroundSprite;
 public:
     Game();
     virtual ~Game();
@@ -31,10 +34,6 @@ public:
     double frametime;
 
     // Sprites
-    sf::Sprite floor;
-    sf::Sprite bkgOne;
-    sf::Sprite bkgTwo;
-    sf::Sprite bkgThree;
     sf::Sprite logo;
 
     // Movement variables
@@ -47,11 +46,9 @@ public:
     void processEvents();
     void update();
     void render();
-    void renderFloor();
-    void renderBackground();
     void renderPlayer();
+    void renderBackground();
     void renderLogo();
-    void renderMenuText();
 
     // Menu state
     int menu; // 0 = menu, 1 = playing, 2 = end
