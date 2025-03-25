@@ -59,6 +59,9 @@ void Game::initVariables()
         temp.setPosition(0.f, 0.f);
         backgroundSprite.push_back(temp);
     }
+
+    //initialising player
+    player.health = 100; //initial health
 }
 
 void Game::initMenuText()
