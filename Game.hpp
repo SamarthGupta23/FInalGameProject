@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include "player.hpp"
 #include <vector>
 
 class Game
@@ -32,6 +33,9 @@ public:
     void initMenuText();
 
     double frametime;
+
+    //player 
+    Player player;
 
     // Sprites
     sf::Sprite logo;
